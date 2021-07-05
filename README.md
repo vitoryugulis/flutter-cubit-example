@@ -11,7 +11,11 @@ flutter run
 
 Esse projeto utiliza o [BLOC](https://medium.com/codechai/architecting-your-flutter-project-bd04e144a8f1) como arquitetura e padrão de gerenciamento de estado.
 Escolhi o BLOC como padrão de arquitetura pois se aproxima bastante da arquitetura MVVM utilizada no Android, que é amplamente adotada pela comunidade,
-recomandedada pela documentação do Android (referência na última seção do README) e contribui para maior manutenibilidade, extensibilidade e testabilidade do projeto.
+recomandedada pela [documentação do Android](https://developer.android.com/jetpack/guide#recommended-app-arch) e contribui para maior manutenibilidade, extensibilidade e testabilidade do projeto.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/cubit_architecture_full.png" />
+</p>
 
 ![Arquitetura BLOC](https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/cubit_architecture_full.png)
 
