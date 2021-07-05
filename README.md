@@ -1,11 +1,19 @@
 # movielist
 Um catálogo de filmes com lista de favoritos a partir da API do [TMDB](https://www.themoviedb.org/?language=pt-BR).
 
+## Rodando o projeto
+```
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs
+flutter run
+```
 ## Observações técnicas
 
 Esse projeto utiliza o [BLOC](https://medium.com/codechai/architecting-your-flutter-project-bd04e144a8f1) como arquitetura e padrão de gerenciamento de estado.
 Escolhi o BLOC como padrão de arquitetura pois se aproxima bastante da arquitetura MVVM utilizada no Android, que é amplamente adotada pela comunidade,
 recomandedada pela documentação do Android (referência na última seção do README) e contribui para maior manutenibilidade, extensibilidade e testabilidade do projeto.
+
+![Arquitetura BLOC](https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/cubit_architecture_full.png)
 
 ## Prints do aplicativo
 
