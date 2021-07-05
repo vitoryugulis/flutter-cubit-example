@@ -17,8 +17,6 @@ recomandedada pela [documentação do Android](https://developer.android.com/jet
   <img src="https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/cubit_architecture_full.png" />
 </p>
 
-![Arquitetura BLOC](https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/cubit_architecture_full.png)
-
 ## Prints do aplicativo
 
 ## Referências técnicas
