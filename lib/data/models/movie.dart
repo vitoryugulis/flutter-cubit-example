@@ -52,7 +52,8 @@ class PaginatedMovies {
 
   MovieDates dates;
   int page;
-  PaginatedMovies(this.page, this.dates);
+  List<Movie> results;
+  PaginatedMovies(this.page, this.dates, this.results);
 
   factory PaginatedMovies.fromJson(Map<String, dynamic> json) => _$PaginatedMoviesFromJson(json);
   Map<String, dynamic> toJson() => _$PaginatedMoviesToJson(this);

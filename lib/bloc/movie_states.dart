@@ -28,6 +28,21 @@ class MovieLoaded extends MovieState {
   int get hashCode => movie.hashCode;
 }
 
+class PaginatedMoviesLoaded extends MovieState {
+  final PaginatedMovies movies;
+  const PaginatedMoviesLoaded(this.movies);
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is PaginatedMoviesLoaded && o.movies == movies;
+  }
+
+  @override
+  int get hashCode => movies.hashCode;
+}
+
 class MovieError extends MovieState {
   final String message;
   const MovieError(this.message);
