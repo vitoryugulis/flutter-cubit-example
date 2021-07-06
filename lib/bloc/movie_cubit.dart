@@ -10,6 +10,7 @@ part 'movie_states.dart';
 
 class MovieCubit extends Cubit<MovieState> {
   final MovieRepository _movieRepository;
+  HomePageMovies? homePageMovies;
 
   MovieCubit(this._movieRepository) : super(MovieInitial());
 
@@ -25,11 +26,12 @@ class MovieCubit extends Cubit<MovieState> {
       var topRated = responses[2].results;
       var upcoming = responses[3].results;
       var nowPlaying = responses[3].results;
-      var homePageMovies = new HomePageMovies(
+      var data = new HomePageMovies(
           popular, latest.first, nowPlaying, topRated, upcoming
       );
-      emit(MovieLoaded(homePageMovies));
-      return homePageMovies;
+      emit(MovieLoaded(data));
+      homePageMovies = data;
+      return data;
     } on Exception catch(e){
       emit(MovieError("Couldn't fetch movie. Is the device online?"));
       throw new Exception(e);

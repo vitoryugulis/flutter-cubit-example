@@ -42,6 +42,10 @@ class Movie {
   double? voteAverage;
   @JsonKey(name: "vote_count")
   int? voteCount;
+  @JsonKey(ignore: true)
+  String get posterImage {
+    return "https://image.tmdb.org/t/p/w500/$posterPath";
+  }
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
   Map<String, dynamic> toJson() => _$MovieToJson(this);
@@ -51,7 +55,7 @@ class Movie {
 class PaginatedMovies {
 
   MovieDates? dates;
-  int page;
+  int? page;
   List<Movie> results;
   PaginatedMovies(this.page, this.dates, this.results);
 

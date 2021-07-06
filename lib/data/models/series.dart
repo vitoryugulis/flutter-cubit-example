@@ -16,14 +16,13 @@ class Series {
   LastEpisodeToAir? lastEpisodeToAir;
   String? name;
   String? nextEpisodeToAir;
-  List<String>? networks;
   int? numberOfEpisodes;
   int? numberOfSeasons;
   List<String>? originCountry;
   String? originalLanguage;
   String? originalName;
   String? overview;
-  int? popularity;
+  double? popularity;
   String? posterPath;
   List<String>? productionCompanies;
   List<ProductionCountries>? productionCountries;
@@ -34,6 +33,10 @@ class Series {
   String? type;
   int? voteAverage;
   int? voteCount;
+  @JsonKey(ignore: true)
+  String get posterImage {
+    return "https://image.tmdb.org/t/p/w500/${this.posterPath}";
+  }
 
   Series(
       {this.backdropPath,
@@ -49,7 +52,6 @@ class Series {
         this.lastEpisodeToAir,
         this.name,
         this.nextEpisodeToAir,
-        this.networks,
         this.numberOfEpisodes,
         this.numberOfSeasons,
         this.originCountry,
