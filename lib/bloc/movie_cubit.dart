@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movielist/data/models/home_page_movies.dart';
 import 'package:movielist/data/models/movie.dart';
 import 'package:movielist/data/repositories/movie_repository.dart';
 
@@ -13,62 +13,86 @@ class MovieCubit extends Cubit<MovieState> {
 
   MovieCubit(this._movieRepository) : super(MovieInitial());
 
-  Future<Movie> getLatest() async {
-    try {
+  Future<HomePageMovies> getHomePageMovies() async {
+    try{
       emit(MovieLoading());
+      var responses = await Future.wait<PaginatedMovies>([
+        _getPopular(), _getLatest(), _getTopRated(),
+        _getUpcoming(), _getNowPlaying()
+      ]);
+      var popular = responses[0].results;
+      var latest = responses[1].results;
+      var topRated = responses[2].results;
+      var upcoming = responses[3].results;
+      var nowPlaying = responses[3].results;
+      var homePageMovies = new HomePageMovies(
+          popular, latest.first, nowPlaying, topRated, upcoming
+      );
+      emit(MovieLoaded(homePageMovies));
+      return homePageMovies;
+    } on Exception catch(e){
+      emit(MovieError("Couldn't fetch movie. Is the device online?"));
+      throw new Exception(e);
+    }
+  }
+
+  Future<PaginatedMovies> _getLatest() async {
+    try {
       final response = await _movieRepository.getLatest();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
-      var movie = Movie.fromJson(json);
-      emit(MovieLoaded(movie));
-      return movie;
+      var data = Movie.fromJson(json);
+      var paginatedMovies = new PaginatedMovies(1, null, [data]);
+      return paginatedMovies;
     } on Exception {
-      emit(MovieError("Couldn't fetch movie. Is the device online?"));
       throw new Exception();
     }
   }
 
-  Future<PaginatedMovies> popular() async {
+  Future<PaginatedMovies> _getPopular() async {
     try {
-      emit(MovieLoading());
       final response = await _movieRepository.popular();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedMovies.fromJson(json);
-      emit(PaginatedMoviesLoaded(data));
       return data;
     } on Exception {
-      emit(MovieError("Couldn't fetch movie. Is the device online?"));
       throw new Exception();
     }
   }
 
-  Future<PaginatedMovies> topRated() async {
+  Future<PaginatedMovies> _getTopRated() async {
     try {
-      emit(MovieLoading());
       final response = await _movieRepository.popular();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedMovies.fromJson(json);
-      emit(PaginatedMoviesLoaded(data));
       return data;
     } on Exception {
-      emit(MovieError("Couldn't fetch movie. Is the device online?"));
       throw new Exception();
     }
   }
 
-  Future<PaginatedMovies> upcoming() async {
+  Future<PaginatedMovies> _getUpcoming() async {
     try {
-      emit(MovieLoading());
       final response = await _movieRepository.popular();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedMovies.fromJson(json);
-      emit(PaginatedMoviesLoaded(data));
       return data;
     } on Exception {
-      emit(MovieError("Couldn't fetch movie. Is the device online?"));
+      throw new Exception();
+    }
+  }
+
+  Future<PaginatedMovies> _getNowPlaying() async {
+    try {
+      final response = await _movieRepository.nowPlaying();
+      var utf8body = utf8.decode(response.bodyBytes);
+      var json = jsonDecode(utf8body);
+      var data = PaginatedMovies.fromJson(json);
+      return data;
+    } on Exception {
       throw new Exception();
     }
   }

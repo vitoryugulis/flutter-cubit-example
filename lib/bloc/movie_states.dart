@@ -14,33 +14,33 @@ class MovieLoading extends MovieState {
 }
 
 class MovieLoaded extends MovieState {
-  final Movie movie;
-  const MovieLoaded(this.movie);
+  final HomePageMovies data;
+  const MovieLoaded(this.data);
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is MovieLoaded && o.movie == movie;
+    return o is MovieLoaded && o.data == data;
   }
 
   @override
-  int get hashCode => movie.hashCode;
+  int get hashCode => data.hashCode;
 }
 
 class PaginatedMoviesLoaded extends MovieState {
-  final PaginatedMovies movies;
-  const PaginatedMoviesLoaded(this.movies);
+  final PaginatedMovies data;
+  const PaginatedMoviesLoaded(this.data);
 
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PaginatedMoviesLoaded && o.movies == movies;
+    return o is PaginatedMoviesLoaded && o.data == data;
   }
 
   @override
-  int get hashCode => movies.hashCode;
+  int get hashCode => data.hashCode;
 }
 
 class MovieError extends MovieState {

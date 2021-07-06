@@ -22,8 +22,13 @@ class SeriesRepository {
     return _caller.get(url);
   }
 
-  Future<Response> upcoming(){
-    var url = "$_apiUrl/tv/upcoming";
+  Future<Response> onTheAir() {
+    var url = "$_apiUrl/tv/on_the_air";
+    return _caller.get(url);
+  }
+
+  Future<Response> airingToday(){
+    var url = "$_apiUrl/tv/airing_today";
     return _caller.get(url);
   }
 }

@@ -26,4 +26,9 @@ class MovieRepository {
     var url = "$_apiUrl/movie/upcoming";
     return _caller.get(url);
   }
+
+  Future<Response> nowPlaying(){
+    var url = "$_apiUrl/movie/now_playing";
+    return _caller.get(url);
+  }
 }

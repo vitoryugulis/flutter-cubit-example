@@ -50,7 +50,7 @@ class Movie {
 @JsonSerializable()
 class PaginatedMovies {
 
-  MovieDates dates;
+  MovieDates? dates;
   int page;
   List<Movie> results;
   PaginatedMovies(this.page, this.dates, this.results);
