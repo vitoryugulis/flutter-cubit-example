@@ -1,7 +1,16 @@
-# movielist
-Um catálogo de filmes com lista de favoritos a partir da API do [TMDB](https://www.themoviedb.org/?language=pt-BR).
+# MovieList
+Um catálogo de filmes e séries, com lista de favoritos a partir da API do [TMDB](https://www.themoviedb.org/?language=pt-BR).
 
 ## Rodando o projeto
+### Requisitos
+- JDK 8+
+- Android Studio 4+ com os seguintes plugins: Flutter e Dart
+- Android SDK
+- Flutter
+- XCode e cocoapods para poder emular no simulador do iOS ou rodar em um dispositivo físico iOS.
+
+### Comandos para rodar o app no emulador
+
 ```
 flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
