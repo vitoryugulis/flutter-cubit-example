@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:movielist/data/models/home_page_movies.dart';
@@ -65,7 +64,7 @@ class MovieCubit extends Cubit<MovieState> {
 
   Future<PaginatedMovies> _getTopRated() async {
     try {
-      final response = await _movieRepository.popular();
+      final response = await _movieRepository.topRated();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedMovies.fromJson(json);
@@ -77,7 +76,7 @@ class MovieCubit extends Cubit<MovieState> {
 
   Future<PaginatedMovies> _getUpcoming() async {
     try {
-      final response = await _movieRepository.popular();
+      final response = await _movieRepository.upcoming();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedMovies.fromJson(json);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movielist/app.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
@@ -8,7 +7,6 @@ import 'package:movielist/bloc/series_cubit.dart';
 import 'package:movielist/data/repositories/genre_repository.dart';
 import 'package:movielist/data/repositories/movie_repository.dart';
 import 'package:movielist/data/repositories/series_repository.dart';
-import 'package:movielist/ui/home_page.dart';
 
 void main() async {
 
