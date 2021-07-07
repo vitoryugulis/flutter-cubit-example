@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
 import 'package:movielist/styles.dart';
+import 'package:movielist/ui/components/details_bottom_sheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,8 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
 
   @override
   void initState() {
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                           size: 36,
                                         ),
                                         Text(
-                                          "Minha lista",
+                                          "My list",
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.white,
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           Padding(padding: EdgeInsets.only(left: 10)),
                                           Text(
-                                            "Assistir",
+                                            "Watch",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 color: Colors.black,
@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         SizedBox(height: 4,),
                                         Text(
-                                          "Saiba mais",
+                                          "See more",
                                           style: TextStyle(
                                               fontSize: 12,
                                               color: Colors.white,
@@ -205,28 +205,46 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             //top rated
-                            Container(
-                              height: 160,
-                              child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.horizontal,
-                                shrinkWrap: true,
-                                itemCount: popular.length,
-                                itemBuilder: (context, index){
-                                  var movie = popular[index];
-                                  return Container(
-                                    height: 160,
-                                    width: 115,
-                                    margin: EdgeInsets.only(right: 7),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image.network(
-                                          movie.posterImage,
-                                          fit: BoxFit.cover
+                            GestureDetector(
+                              onTap: () {
+                                showMaterialModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  duration: Duration(milliseconds: 300),
+                                  context: context,
+                                  builder: (context) => DetailsBottomSheet(
+                                      highlight.title!,
+                                      highlight.id!,
+                                      true,
+                                      highlight.posterImage,
+                                      highlight.overview!,
+                                      //highlight.releaseDate!
+                                      2020
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 160,
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemCount: popular.length,
+                                  itemBuilder: (context, index){
+                                    var movie = popular[index];
+                                    return Container(
+                                      height: 160,
+                                      width: 115,
+                                      margin: EdgeInsets.only(right: 7),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Image.network(
+                                            movie.posterImage,
+                                            fit: BoxFit.cover
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ],
