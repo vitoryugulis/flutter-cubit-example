@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
 import 'package:movielist/bloc/series_cubit.dart';
 
@@ -51,9 +52,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: highlight.genreIds!.map((e) {
+                          children: highlight.genreIds!.map((id) {
                             return Text(
-                              e.toString(),
+                              _getGenreName(id)?? "-",
                               style: TextStyle(
                                   fontSize: 12,
                                   color: Colors.white
@@ -127,5 +128,9 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  String? _getGenreName(int genreId){
+    return BlocProvider.of<GenresCubit>(context).genres!.firstWhere((element) => element.id == genreId).name;
   }
 }
