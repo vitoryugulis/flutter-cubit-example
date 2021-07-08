@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             borderRadius: BorderRadius.circular(5),
                                             child: Material(
                                                 child: InkWell(
-                                                  onTap: () => _showMovieDetails(highlight),
+                                                  onTap: () {},
                                                   child: Ink(
                                                     color: Colors.white,
                                                     child: Container(
@@ -431,7 +431,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           true,
           movie.posterImage,
           movie.overview!,
-          DateFormat.y().format(DateTime.parse(movie.releaseDate?? "2020-01-01")),
+          movie.releaseDate != ""? DateFormat.y().format(DateTime.parse(movie.releaseDate!)) : movie.releaseDate?? " - ",
           movie.hasPosterImage
       ),
     );

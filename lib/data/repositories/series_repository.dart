@@ -31,4 +31,9 @@ class SeriesRepository {
     var url = "$_apiUrl/tv/airing_today";
     return _caller.get(url);
   }
+
+  Future<Response> getById(int id){
+    var url = "$_apiUrl/tv/$id";
+    return _caller.get(url);
+  }
 }

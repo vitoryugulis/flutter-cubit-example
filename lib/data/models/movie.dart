@@ -17,7 +17,15 @@ class Movie {
     this.title,
     this.video,
     this.voteAverage,
-    this.voteCount
+    this.voteCount,
+    this.productionCountries,
+    this.revenue,
+    this.runtime,
+    this.spokenLanguages,
+    this.status,
+    this.tagline,
+    this.type,
+    this.genres
   });
 
   bool? adult;
@@ -25,6 +33,7 @@ class Movie {
   String? backdropPath;
   @JsonKey(name: "genre_ids")
   List<int>? genreIds;
+  List<Genres>? genres;
   int? id;
   @JsonKey(name: "original_language")
   String? originalLanguage;
@@ -34,9 +43,18 @@ class Movie {
   double? popularity;
   @JsonKey(name: "poster_path")
   String? posterPath;
+  @JsonKey(name: "production_countries")
+  List<ProductionCountries>? productionCountries;
+  @JsonKey(name: "spoken_languages")
+  List<SpokenLanguages>? spokenLanguages;
   @JsonKey(name: "release_date")
   String? releaseDate;
   String? title;
+  String? status;
+  String? tagline;
+  String? type;
+  int? runtime;
+  int? revenue;
   bool? video;
   @JsonKey(name: "vote_average")
   double? voteAverage;
@@ -85,4 +103,38 @@ class MovieDates {
 
   factory MovieDates.fromJson(Map<String, dynamic> json) => _$MovieDatesFromJson(json);
   Map<String, dynamic> toJson() => _$MovieDatesToJson(this);
+}
+
+@JsonSerializable()
+class Genres {
+  int? id;
+  String? name;
+
+  Genres({this.id, this.name});
+
+  factory Genres.fromJson(Map<String, dynamic> json) => _$GenresFromJson(json);
+  Map<String, dynamic> toJson() => _$GenresToJson(this);
+}
+
+@JsonSerializable()
+class ProductionCountries {
+  String? iso31661;
+  String? name;
+
+  ProductionCountries({this.iso31661, this.name});
+
+  factory ProductionCountries.fromJson(Map<String, dynamic> json) => _$ProductionCountriesFromJson(json);
+  Map<String, dynamic> toJson() => _$ProductionCountriesToJson(this);
+}
+
+@JsonSerializable()
+class SpokenLanguages {
+  String? englishName;
+  String? iso6391;
+  String? name;
+
+  SpokenLanguages({this.englishName, this.iso6391, this.name});
+
+  factory SpokenLanguages.fromJson(Map<String, dynamic> json) => _$SpokenLanguagesFromJson(json);
+  Map<String, dynamic> toJson() => _$SpokenLanguagesToJson(this);
 }

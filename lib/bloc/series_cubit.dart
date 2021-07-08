@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:movielist/data/models/home_page_series.dart';
@@ -92,6 +91,18 @@ class SeriesCubit extends Cubit<SeriesState> {
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedSeries.fromJson(json);
+      return data;
+    } on Exception {
+      throw new Exception();
+    }
+  }
+
+  Future<Series> getById(int id) async {
+    try {
+      final response = await _seriesRepository.getById(id);
+      var utf8body = utf8.decode(response.bodyBytes);
+      var json = jsonDecode(utf8body);
+      var data = Series.fromJson(json);
       return data;
     } on Exception {
       throw new Exception();

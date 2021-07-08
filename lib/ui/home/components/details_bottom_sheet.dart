@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:movielist/bloc/movie_cubit.dart';
+import 'package:movielist/data/repositories/movie_repository.dart';
 import 'package:movielist/ui/assets.dart';
+import 'package:movielist/ui/details/movie_details_page.dart';
 
 class DetailsBottomSheet extends StatelessWidget {
   final String posterImage;
@@ -26,7 +30,7 @@ class DetailsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 291,
+      height: 296,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
         color: Color(0xFF212121),
@@ -212,7 +216,7 @@ class DetailsBottomSheet extends StatelessWidget {
               color: Color(0xFF424242),
             ),
             GestureDetector(
-              onTap: () => _openDetailsPage(isMovie, id),
+              onTap: () => _openDetailsPage(context, isMovie, id),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
                 child: Row(
@@ -260,7 +264,20 @@ class DetailsBottomSheet extends StatelessWidget {
     );
   }
 
-  _openDetailsPage(bool isMovie, int id) {
-
+  _openDetailsPage(BuildContext context, bool isMovie, int id) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context){
+          return isMovie?
+          BlocProvider(
+            create: (BuildContext context) => MovieCubit(new MovieRepository()),
+            child: MovieDetailsPage(id),
+          ) :
+          BlocProvider(
+            create: (BuildContext context) => MovieCubit(new MovieRepository()),
+            child: MovieDetailsPage(id),
+          );
+        })
+    );
   }
 }

@@ -97,4 +97,19 @@ class MovieCubit extends Cubit<MovieState> {
       throw new Exception();
     }
   }
+
+  Future<Movie> getById(int id) async {
+    try {
+      emit(MovieLoading());
+      final response = await _movieRepository.getById(id);
+      var utf8body = utf8.decode(response.bodyBytes);
+      var json = jsonDecode(utf8body);
+      var data = Movie.fromJson(json);
+      emit(MovieDetailsLoaded(data));
+      return data;
+    } on Exception {
+      emit(MovieError("Error fetching movie data"));
+      throw new Exception();
+    }
+  }
 }
