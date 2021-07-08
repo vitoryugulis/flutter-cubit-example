@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
+import 'package:movielist/data/models/movie.dart';
 import 'package:movielist/styles.dart';
 import 'package:movielist/ui/components/details_bottom_sheet.dart';
 
@@ -112,43 +113,54 @@ class _HomePageState extends State<HomePage> {
                                         Icon(
                                           Icons.add,
                                           color: Colors.white,
-                                          size: 36,
+                                          size: 30,
                                         ),
                                         Text(
                                           "My list",
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 11,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w300
                                           ),
                                         ),
                                       ],
                                     ),
+
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 40),
-                                      padding: EdgeInsets.only(left: 10, right: 16, top: 5, bottom: 5),
-                                      decoration: BoxDecoration(
+                                      padding: EdgeInsets.symmetric(horizontal: 40),
+                                      child: ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
-                                        color: Colors.white,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Icon(
-                                            Icons.play_arrow,
-                                            color: Colors.black,
-                                            size: 28,
-                                          ),
-                                          Padding(padding: EdgeInsets.only(left: 10)),
-                                          Text(
-                                            "Watch",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                color: Colors.black,
-                                              fontWeight: FontWeight.bold
-                                            ),
-                                          ),
-                                        ],
+                                        child: Material(
+                                            child: InkWell(
+                                              onTap: () => _showDetailsBottomSheet(highlight),
+                                              child: Ink(
+                                                color: Colors.white,
+                                                child: Container(
+                                                  height: 36,
+                                                  padding: EdgeInsets.only(right: 16, left: 8),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.play_arrow,
+                                                        color: Colors.black,
+                                                        size: 24,
+                                                      ),
+                                                      Padding(padding: EdgeInsets.only(left: 8)),
+                                                      Text(
+                                                        "Watch",
+                                                        style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                        ),
                                       ),
                                     ),
                                     Column(
@@ -157,13 +169,13 @@ class _HomePageState extends State<HomePage> {
                                         Icon(
                                           Icons.info_outline,
                                           color: Colors.white,
-                                          size: 30,
+                                          size: 26,
                                         ),
                                         SizedBox(height: 4,),
                                         Text(
                                           "See more",
                                           style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 11,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w300
                                           ),
@@ -205,33 +217,18 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             //top rated
-                            GestureDetector(
-                              onTap: () {
-                                showMaterialModalBottomSheet(
-                                  backgroundColor: Colors.transparent,
-                                  duration: Duration(milliseconds: 300),
-                                  context: context,
-                                  builder: (context) => DetailsBottomSheet(
-                                      highlight.title!,
-                                      highlight.id!,
-                                      true,
-                                      highlight.posterImage,
-                                      highlight.overview!,
-                                      //highlight.releaseDate!
-                                      2020
-                                  ),
-                                );
-                              },
-                              child: Container(
-                                height: 160,
-                                child: ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemCount: popular.length,
-                                  itemBuilder: (context, index){
-                                    var movie = popular[index];
-                                    return Container(
+                            Container(
+                              height: 160,
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.horizontal,
+                                shrinkWrap: true,
+                                itemCount: popular.length,
+                                itemBuilder: (context, index){
+                                  var movie = popular[index];
+                                  return GestureDetector(
+                                    onTap: () => _showDetailsBottomSheet(movie),
+                                    child: Container(
                                       height: 160,
                                       width: 115,
                                       margin: EdgeInsets.only(right: 7),
@@ -242,9 +239,9 @@ class _HomePageState extends State<HomePage> {
                                             fit: BoxFit.cover
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -274,15 +271,18 @@ class _HomePageState extends State<HomePage> {
                                 itemCount: topRated.length,
                                 itemBuilder: (context, index){
                                   var movie = topRated[index];
-                                  return Container(
-                                    height: 160,
-                                    width: 115,
-                                    margin: EdgeInsets.only(right: 7),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image.network(
-                                          movie.posterImage,
-                                          fit: BoxFit.cover
+                                  return GestureDetector(
+                                    onTap: () => _showDetailsBottomSheet(movie),
+                                    child: Container(
+                                      height: 160,
+                                      width: 115,
+                                      margin: EdgeInsets.only(right: 7),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Image.network(
+                                            movie.posterImage,
+                                            fit: BoxFit.cover
+                                        ),
                                       ),
                                     ),
                                   );
@@ -316,15 +316,18 @@ class _HomePageState extends State<HomePage> {
                                 itemCount: nowPlaying.length,
                                 itemBuilder: (context, index){
                                   var movie = nowPlaying[index];
-                                  return Container(
-                                    height: 160,
-                                    width: 115,
-                                    margin: EdgeInsets.only(right: 7),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image.network(
-                                          movie.posterImage,
-                                          fit: BoxFit.cover
+                                  return GestureDetector(
+                                    onTap: () => _showDetailsBottomSheet(movie),
+                                    child: Container(
+                                      height: 160,
+                                      width: 115,
+                                      margin: EdgeInsets.only(right: 7),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Image.network(
+                                            movie.posterImage,
+                                            fit: BoxFit.cover
+                                        ),
                                       ),
                                     ),
                                   );
@@ -359,13 +362,13 @@ class _HomePageState extends State<HomePage> {
           Text(
             _getGenreName(id)?? "-",
             style: TextStyle(
-                fontSize: 15,
+                fontSize: 13.5,
                 color: Colors.white
             ),
           ),
           if(genreIds.length > 1 && index < genreIds.length - 1)
             Container(
-              margin: EdgeInsets.only(bottom: 3, left: 5, right: 5),
+              margin: EdgeInsets.only(bottom: 3, left: 8, right: 8),
               width: 5,
               height: 5,
               decoration: BoxDecoration(
@@ -380,4 +383,53 @@ class _HomePageState extends State<HomePage> {
     }).toList();
 
   }
+
+  void _showDetailsBottomSheet(Movie movie) {
+    DetailsBottomSheet.show(
+      context,
+      DetailsBottomSheet(
+          movie.title!,
+          movie.id!,
+          true,
+          movie.posterImage,
+          movie.overview!,
+          //highlight.releaseDate!
+          2020
+      ),
+    );
+  }
 }
+//
+// AnimationController? _ColorAnimationController;
+// AnimationController? _TextAnimationController;
+// Animation? _colorTween, _iconColorTween;
+// Animation<Offset>? _transTween;
+//
+// @override
+// void initState() {
+//   super.initState();
+//   _ColorAnimationController =
+//       AnimationController(vsync: this, duration: Duration(seconds: 0));
+//   _colorTween = ColorTween(begin: Colors.transparent, end: Color(0xFFee4c4f))
+//       .animate(_ColorAnimationController!);
+//   _iconColorTween = ColorTween(begin: Colors.grey, end: Colors.white)
+//       .animate(_ColorAnimationController!);
+//
+//
+//   _TextAnimationController =
+//       AnimationController(vsync: this, duration: Duration(seconds: 0));
+//
+//   _transTween = Tween(begin: Offset(-10, 40), end: Offset(-10, 0))
+//       .animate(_TextAnimationController!);
+// }
+//
+// bool _scrollListener(ScrollNotification scrollInfo) {
+//   if (scrollInfo.metrics.axis == Axis.vertical) {
+//     _ColorAnimationController!.animateTo(scrollInfo.metrics.pixels / 350);
+//
+//     _TextAnimationController!.animateTo(
+//         (scrollInfo.metrics.pixels - 350) / 50);
+//     return true;
+//   }
+//   return false;
+// }
