@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class Fonts {
   static TextStyle title = TextStyle(
       fontSize: 21,

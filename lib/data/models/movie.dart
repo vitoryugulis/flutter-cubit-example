@@ -46,6 +46,10 @@ class Movie {
   String get posterImage {
     return "https://image.tmdb.org/t/p/w500/$posterPath";
   }
+  @JsonKey(ignore: true)
+  bool get hasPosterImage {
+    return posterPath == null? false : true;
+  }
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
   Map<String, dynamic> toJson() => _$MovieToJson(this);

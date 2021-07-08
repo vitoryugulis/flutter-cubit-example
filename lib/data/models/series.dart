@@ -3,39 +3,62 @@ part 'series.g.dart';
 
 @JsonSerializable()
 class Series {
+  @JsonKey(name: "backdrop_path")
   String? backdropPath;
+  @JsonKey(name: "created_by")
   List<String>? createdBy;
+  @JsonKey(name: "episode_run_time")
   List<int>? episodeRunTime;
+  @JsonKey(name: "first_air_date")
   String? firstAirDate;
   List<Genres>? genres;
   String? homepage;
   int? id;
+  @JsonKey(name: "in_production")
   bool? inProduction;
   List<String>? languages;
+  @JsonKey(name: "last_air_date")
   String? lastAirDate;
+  @JsonKey(name: "last_episode_to_air")
   LastEpisodeToAir? lastEpisodeToAir;
   String? name;
+  @JsonKey(name: "next_episode_to_air")
   String? nextEpisodeToAir;
+  @JsonKey(name: "number_of_episodes")
   int? numberOfEpisodes;
+  @JsonKey(name: "number_of_seasons")
   int? numberOfSeasons;
+  @JsonKey(name: "origin_country")
   List<String>? originCountry;
+  @JsonKey(name: "original_language")
   String? originalLanguage;
+  @JsonKey(name: "original_name")
   String? originalName;
   String? overview;
   double? popularity;
+  @JsonKey(name: "poster_path")
   String? posterPath;
+  @JsonKey(name: "production_companies")
   List<String>? productionCompanies;
+  @JsonKey(name: "production_countries")
   List<ProductionCountries>? productionCountries;
   List<Seasons>? seasons;
+  @JsonKey(name: "spoken_languages")
   List<SpokenLanguages>? spokenLanguages;
   String? status;
   String? tagline;
   String? type;
-  int? voteAverage;
+  @JsonKey(name: "vote_average")
+  double? voteAverage;
+  @JsonKey(name: "vote_count")
   int? voteCount;
   @JsonKey(ignore: true)
   String get posterImage {
     return "https://image.tmdb.org/t/p/w500/${this.posterPath}";
+  }
+  @JsonKey(ignore: true)
+  bool get hasPosterImage {
+    return posterPath == null? false : true;
   }
 
   Series(

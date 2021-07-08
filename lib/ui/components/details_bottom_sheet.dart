@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:movielist/assets.dart';
 
 class DetailsBottomSheet extends StatelessWidget {
   final String posterImage;
@@ -9,6 +10,7 @@ class DetailsBottomSheet extends StatelessWidget {
   final String synopsis;
   final id;
   final bool isMovie;
+  final bool hasPosterImage;
   const DetailsBottomSheet(
       this.title,
       this.id,
@@ -16,6 +18,7 @@ class DetailsBottomSheet extends StatelessWidget {
       this.posterImage,
       this.synopsis,
       this.year,
+      this.hasPosterImage,
       {Key? key}
   ) : super(key: key);
 
@@ -23,7 +26,7 @@ class DetailsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 280,
+      height: 291,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15)),
         color: Color(0xFF212121),
@@ -44,7 +47,9 @@ class DetailsBottomSheet extends StatelessWidget {
                     height: 150,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
-                      child: Image.network(
+                      child: !hasPosterImage?
+                      Image.asset(Assets.defaultPoster) :
+                      Image.network(
                         posterImage,
                         fit: BoxFit.cover,
                       ),
@@ -87,6 +92,7 @@ class DetailsBottomSheet extends StatelessWidget {
                               )
                             ],
                           ),
+                          Padding(padding: EdgeInsets.only(top: 5)),
                           Row(
                             children: [
                               Text(
@@ -216,7 +222,7 @@ class DetailsBottomSheet extends StatelessWidget {
                   ),
                   SizedBox(width: 8,),
                   Text(
-                    "Episodes and information",
+                    isMovie? "More information" : "Episodes and information",
                     style: TextStyle(
                         fontSize: 13.5,
                         color: Colors.white,

@@ -10,7 +10,7 @@ part 'series_states.dart';
 
 class SeriesCubit extends Cubit<SeriesState> {
   final SeriesRepository _seriesRepository;
-
+  HomePageSeries? homePageSeries;
   SeriesCubit(this._seriesRepository) : super(SeriesInitial());
 
   Future<HomePageSeries> getHomePageSeries() async {
@@ -25,11 +25,12 @@ class SeriesCubit extends Cubit<SeriesState> {
       var onTheAir = responses[2].results;
       var topRated = responses[3].results;
       var airingToday = responses[4].results;
-      var homePageSeries = new HomePageSeries(
+      var data = new HomePageSeries(
           popular, latest.first, onTheAir, topRated, airingToday
       );
-      emit(SeriesLoaded(homePageSeries));
-      return homePageSeries;
+      emit(SeriesLoaded(data));
+      homePageSeries = data;
+      return data;
     } on Exception catch(e){
       emit(SeriesError("Couldn't fetch movie. Is the device online?"));
       throw new Exception(e);
@@ -63,7 +64,7 @@ class SeriesCubit extends Cubit<SeriesState> {
 
   Future<PaginatedSeries> _getTopRated() async {
     try {
-      final response = await _seriesRepository.popular();
+      final response = await _seriesRepository.topRated();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedSeries.fromJson(json);
@@ -75,7 +76,7 @@ class SeriesCubit extends Cubit<SeriesState> {
 
   Future<PaginatedSeries> _getOnTheAir() async {
     try {
-      final response = await _seriesRepository.popular();
+      final response = await _seriesRepository.onTheAir();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedSeries.fromJson(json);
@@ -87,7 +88,7 @@ class SeriesCubit extends Cubit<SeriesState> {
 
   Future<PaginatedSeries> _getAiringToday() async {
     try {
-      final response = await _seriesRepository.popular();
+      final response = await _seriesRepository.airingToday();
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = PaginatedSeries.fromJson(json);
