@@ -288,7 +288,8 @@ class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
                                           ),
                                         ],
                                       ),
-                                    )
+                                    ),
+                                    SizedBox(height: 40,),
                                   ],
                                 ),
                               ),

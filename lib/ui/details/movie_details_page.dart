@@ -287,7 +287,8 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           ),
                                         ],
                                       ),
-                                    )
+                                    ),
+                                    SizedBox(height: 40,),
                                   ],
                                 ),
                               ),
