@@ -27,8 +27,6 @@ recomandedada pela [documentação do Android](https://developer.android.com/jet
   <img src="https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/cubit_architecture_full.png" />
 </p>
 
-## Prints do aplicativo
-
 ## Referências técnicas
 
 - [List of state management approaches](https://flutter.dev/docs/development/data-and-backend/state-mgmt/options)
@@ -37,6 +35,14 @@ recomandedada pela [documentação do Android](https://developer.android.com/jet
 - [The Repository Pattern: Properly Organizing Your Data Layer](https://dev.to/adammc331/the-repository-pattern-properly-organizing-your-data-layer-10bg)
 - [Guia para a arquitetura do app](https://developer.android.com/jetpack/guide#recommended-app-arch)
 
+## Prints do aplicativo
 
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/vitoryugulis/flutter-movie-rater/main/assets/app_prints/Screenshot_1625783921.png" width="250" title="hover text">
+  <img src="https://raw.githubusercontent.com/vitoryugulis/flutter-movie-rater/main/assets/app_prints/Screenshot_1625783927.png" width="250" title="hover text">
+  <img src="https://raw.githubusercontent.com/vitoryugulis/flutter-movie-rater/main/assets/app_prints/Screenshot_1625783933.png" width="250" title="hover text">
+  <img src="https://raw.githubusercontent.com/vitoryugulis/flutter-movie-rater/main/assets/app_prints/Screenshot_1625783937.png" width="250" title="hover text">
+  <img src="https://raw.githubusercontent.com/vitoryugulis/flutter-movie-rater/main/assets/app_prints/Screenshot_1625783944.png" width="250" title="hover text">
+<p>
+  
 
