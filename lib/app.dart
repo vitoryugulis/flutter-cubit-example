@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
 import 'package:movielist/bloc/series_cubit.dart';
+import 'package:movielist/ui/home/app_error_page.dart';
 import 'package:movielist/ui/home/home_page.dart';
 
 
@@ -11,8 +12,9 @@ class App extends StatelessWidget {
   final MovieCubit movieCubit;
   final SeriesCubit seriesCubit;
   final GenresCubit genresCubit;
+  final bool hasLoadingError;
 
-  App(this.movieCubit, this.seriesCubit, this.genresCubit);
+  App(this.movieCubit, this.seriesCubit, this.genresCubit, this.hasLoadingError);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class App extends StatelessWidget {
             _blocProvider(seriesCubit),
             _blocProvider(genresCubit)
           ],
-          child: HomePage(),
+          child: hasLoadingError? AppErrorPage() : HomePage(),
         )
     );
   }

@@ -14,12 +14,17 @@ void main() async {
   var seriesCubit = SeriesCubit(new SeriesRepository());
   var movieCubit = MovieCubit(new MovieRepository());
   var genresCubit = GenresCubit(new GenresRepository());
-  await _loadAppData(
-      seriesCubit,
-      movieCubit,
-      genresCubit
-  );
-  runApp(App(movieCubit, seriesCubit, genresCubit));
+  try{
+    await _loadAppData(
+        seriesCubit,
+        movieCubit,
+        genresCubit
+    );
+    runApp(App(movieCubit, seriesCubit, genresCubit, false));
+  } on Exception catch(e){
+    print(e);
+    runApp(App(movieCubit, seriesCubit, genresCubit, true));
+  }
 }
 
 Future _loadAppData(SeriesCubit seriesCubit, MovieCubit movieCubit, GenresCubit genresCubit) async {
