@@ -60,6 +60,14 @@ class Series {
   bool get hasPosterImage {
     return posterPath == null? false : true;
   }
+  @JsonKey(ignore: true)
+  String get backdropImage {
+    return "https://image.tmdb.org/t/p/w500/$backdropPath";
+  }
+  @JsonKey(ignore: true)
+  bool get hasBackDropImage {
+    return backdropPath == null? false : true;
+  }
 
   Series(
       {this.backdropPath,

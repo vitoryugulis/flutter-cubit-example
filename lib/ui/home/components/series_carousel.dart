@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:movielist/assets.dart';
+import 'package:movielist/ui/assets.dart';
 import 'package:movielist/data/models/series.dart';
-import 'package:movielist/ui/components/details_bottom_sheet.dart';
+import 'package:movielist/ui/home/components/details_bottom_sheet.dart';
 
 class SeriesCarousel extends StatelessWidget {
   final List<Series> series;
@@ -25,7 +25,7 @@ class SeriesCarousel extends StatelessWidget {
             onTap: () => _showSeriesDetails(context, item),
             child: Container(
               height: 160,
-              width: 115,
+              width: 110,
               margin: EdgeInsets.only(right: 7),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),

@@ -50,6 +50,14 @@ class Movie {
   bool get hasPosterImage {
     return posterPath == null? false : true;
   }
+  @JsonKey(ignore: true)
+  String get backdropImage {
+    return "https://image.tmdb.org/t/p/w500/$backdropPath";
+  }
+  @JsonKey(ignore: true)
+  bool get hasBackDropImage {
+    return backdropPath == null? false : true;
+  }
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
   Map<String, dynamic> toJson() => _$MovieToJson(this);

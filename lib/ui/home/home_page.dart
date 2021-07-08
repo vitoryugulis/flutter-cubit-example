@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:movielist/assets.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
 import 'package:movielist/bloc/series_cubit.dart';
 import 'package:movielist/data/models/movie.dart';
-import 'package:movielist/data/models/series.dart';
-import 'package:movielist/styles.dart';
-import 'package:movielist/ui/components/details_bottom_sheet.dart';
-import 'package:movielist/ui/components/movie_carousel.dart';
-import 'package:movielist/ui/components/series_carousel.dart';
+import 'package:movielist/ui/styles.dart';
+import 'package:movielist/ui/home/components/details_bottom_sheet.dart';
+import 'package:movielist/ui/home/components/movie_carousel.dart';
+import 'package:movielist/ui/home/components/series_carousel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -136,7 +134,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     Padding(padding: EdgeInsets.only(bottom: 10),),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Column(
                                           mainAxisAlignment: MainAxisAlignment.end,
@@ -156,7 +154,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             ),
                                           ],
                                         ),
-
                                         Container(
                                           padding: EdgeInsets.symmetric(horizontal: 40),
                                           child: ClipRRect(
@@ -194,24 +191,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             ),
                                           ),
                                         ),
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            Icon(
-                                              Icons.info_outline,
-                                              color: Colors.white,
-                                              size: 22,
-                                            ),
-                                            SizedBox(height: 4,),
-                                            Text(
-                                              "See more",
-                                              style: TextStyle(
-                                                  fontSize: 11,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w300
+                                        GestureDetector(
+                                          onTap: () => _showMovieDetails(highlight),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Icon(
+                                                Icons.info_outline,
+                                                color: Colors.white,
+                                                size: 22,
                                               ),
-                                            ),
-                                          ],
+                                              SizedBox(height: 4,),
+                                              Text(
+                                                "See more",
+                                                style: TextStyle(
+                                                    fontSize: 11,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w300
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     )

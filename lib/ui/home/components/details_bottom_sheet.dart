@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:movielist/assets.dart';
+import 'package:movielist/ui/assets.dart';
 
 class DetailsBottomSheet extends StatelessWidget {
   final String posterImage;
   final String title;
   final String year;
   final String synopsis;
-  final id;
+  final int id;
   final bool isMovie;
   final bool hasPosterImage;
   const DetailsBottomSheet(
@@ -128,7 +128,7 @@ class DetailsBottomSheet extends StatelessWidget {
             ),
             SizedBox(height: 4,),
             Container(
-              padding: EdgeInsets.only(right: 30, left: 10),
+              padding: EdgeInsets.only(right: 40, left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -194,7 +194,7 @@ class DetailsBottomSheet extends StatelessWidget {
                         size: 24,
                       ),
                       Text(
-                        "See more",
+                        "Trailer",
                         style: TextStyle(
                             fontSize: 11,
                             color: Colors.white,
@@ -211,35 +211,38 @@ class DetailsBottomSheet extends StatelessWidget {
               height: 3,
               color: Color(0xFF424242),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    color: Colors.white,
-                    size: 22,
-                  ),
-                  SizedBox(width: 8,),
-                  Text(
-                    isMovie? "More information" : "Episodes and information",
-                    style: TextStyle(
-                        fontSize: 13.5,
-                        color: Colors.white,
-                        fontWeight: FontWeight.normal
+            GestureDetector(
+              onTap: () => _openDetailsPage(isMovie, id),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 9),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      color: Colors.white,
+                      size: 22,
                     ),
-                  ),
-                  Expanded(
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        child: Icon(
-                          Icons.arrow_forward_ios,
+                    SizedBox(width: 8,),
+                    Text(
+                      isMovie? "More information" : "Episodes and information",
+                      style: TextStyle(
+                          fontSize: 13.5,
                           color: Colors.white,
-                          size: 16,
-                        ),
-                      )
-                  ),
-                ],
+                          fontWeight: FontWeight.normal
+                      ),
+                    ),
+                    Expanded(
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        )
+                    ),
+                  ],
+                ),
               ),
             )
           ],
@@ -255,5 +258,9 @@ class DetailsBottomSheet extends StatelessWidget {
       context: context,
       builder: (context) => bottomSheet
     );
+  }
+
+  _openDetailsPage(bool isMovie, int id) {
+
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
 import 'package:movielist/bloc/series_cubit.dart';
-import 'package:movielist/ui/home_page.dart';
+import 'package:movielist/ui/home/home_page.dart';
 
 
 class App extends StatelessWidget {
