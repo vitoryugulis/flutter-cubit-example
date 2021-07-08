@@ -22,8 +22,6 @@ class Series {
   @JsonKey(name: "last_episode_to_air")
   LastEpisodeToAir? lastEpisodeToAir;
   String? name;
-  @JsonKey(name: "next_episode_to_air")
-  String? nextEpisodeToAir;
   @JsonKey(name: "number_of_episodes")
   int? numberOfEpisodes;
   @JsonKey(name: "number_of_seasons")
@@ -82,7 +80,6 @@ class Series {
         this.lastAirDate,
         this.lastEpisodeToAir,
         this.name,
-        this.nextEpisodeToAir,
         this.numberOfEpisodes,
         this.numberOfSeasons,
         this.originCountry,
