@@ -3,11 +3,12 @@ Um catálogo de filmes e séries, com lista de favoritos a partir da API do [TMD
 
 ## Rodando o projeto
 ### Requisitos
+- Flutter 2.2.3 (channel stable)
+- Dart 2.13.4
 - JDK 8+
 - Android Studio 4+ com os seguintes plugins: Flutter e Dart
 - Android SDK
-- Flutter
-- XCode e cocoapods para poder emular no simulador do iOS ou rodar em um dispositivo físico iOS.
+- XCode e cocoapods para poder rodar no simulador do iOS ou em um iPhone.
 
 ### Comandos para rodar o app no emulador
 
