@@ -6,7 +6,7 @@ import 'package:movielist/assets.dart';
 class DetailsBottomSheet extends StatelessWidget {
   final String posterImage;
   final String title;
-  final int year;
+  final String year;
   final String synopsis;
   final id;
   final bool isMovie;
@@ -96,7 +96,7 @@ class DetailsBottomSheet extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                year.toString(),
+                                year,
                                 style: TextStyle(
                                     fontSize: 13,
                                     color: Colors.grey,

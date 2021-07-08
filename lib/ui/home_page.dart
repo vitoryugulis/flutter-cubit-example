@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:movielist/assets.dart';
 import 'package:movielist/bloc/genres_cubit.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:movielist/data/models/movie.dart';
 import 'package:movielist/data/models/series.dart';
 import 'package:movielist/styles.dart';
 import 'package:movielist/ui/components/details_bottom_sheet.dart';
+import 'package:movielist/ui/components/movie_carousel.dart';
 import 'package:movielist/ui/components/series_carousel.dart';
 
 class HomePage extends StatefulWidget {
@@ -245,34 +247,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     style: Fonts.title,
                                   ),
                                 ),
-                                //top rated
-                                Container(
-                                  height: 160,
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: popular.length,
-                                    itemBuilder: (context, index){
-                                      var movie = popular[index];
-                                      return GestureDetector(
-                                        onTap: () => _showMovieDetails(movie),
-                                        child: Container(
-                                          height: 160,
-                                          width: 115,
-                                          margin: EdgeInsets.only(right: 7),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5),
-                                            child: Image.network(
-                                                movie.posterImage,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                MovieCarousel(popular),
                               ],
                             ),
                           ),
@@ -291,33 +266,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 //top rated
-                                Container(
-                                  height: 160,
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: topRated.length,
-                                    itemBuilder: (context, index){
-                                      var movie = topRated[index];
-                                      return GestureDetector(
-                                        onTap: () => _showMovieDetails(movie),
-                                        child: Container(
-                                          height: 160,
-                                          width: 115,
-                                          margin: EdgeInsets.only(right: 7),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5),
-                                            child: Image.network(
-                                                movie.posterImage,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                MovieCarousel(topRated),
                               ],
                             ),
                           ),
@@ -335,34 +284,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     style: Fonts.title,
                                   ),
                                 ),
-                                //top rated
-                                Container(
-                                  height: 160,
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: nowPlaying.length,
-                                    itemBuilder: (context, index){
-                                      var movie = nowPlaying[index];
-                                      return GestureDetector(
-                                        onTap: () => _showMovieDetails(movie),
-                                        child: Container(
-                                          height: 160,
-                                          width: 115,
-                                          margin: EdgeInsets.only(right: 7),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5),
-                                            child: Image.network(
-                                                movie.posterImage,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                MovieCarousel(nowPlaying),
                                 Padding(padding: EdgeInsets.only(bottom: 20)),
                               ],
                             ),
@@ -380,36 +302,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     style: Fonts.title,
                                   ),
                                 ),
-                                //top rated
-                                Container(
-                                  height: 160,
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: topRatedSeries.length,
-                                    itemBuilder: (context, index){
-                                      var series = topRatedSeries[index];
-                                      return GestureDetector(
-                                        onTap: () => _showSeriesDetails(series),
-                                        child: Container(
-                                          height: 160,
-                                          width: 115,
-                                          margin: EdgeInsets.only(right: 7),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5),
-                                            child: !series.hasPosterImage?
-                                            Image.asset(Assets.defaultPoster) :
-                                            Image.network(
-                                                series.posterImage,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                SeriesCarousel(topRatedSeries),
                                 Padding(padding: EdgeInsets.only(bottom: 20)),
                               ],
                             ),
@@ -427,36 +320,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     style: Fonts.title,
                                   ),
                                 ),
-                                //top rated
-                                Container(
-                                  height: 160,
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: popularSeries.length,
-                                    itemBuilder: (context, index){
-                                      var series = popularSeries[index];
-                                      return GestureDetector(
-                                        onTap: () => _showSeriesDetails(series),
-                                        child: Container(
-                                          height: 160,
-                                          width: 115,
-                                          margin: EdgeInsets.only(right: 7),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5),
-                                            child: !series.hasPosterImage?
-                                            Image.asset(Assets.defaultPoster) :
-                                            Image.network(
-                                                series.posterImage,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                SeriesCarousel(popularSeries),
                                 Padding(padding: EdgeInsets.only(bottom: 20)),
                               ],
                             ),
@@ -475,36 +339,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     style: Fonts.title,
                                   ),
                                 ),
-                                //top rated
-                                Container(
-                                  height: 160,
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: airingToday.length,
-                                    itemBuilder: (context, index){
-                                      var series = airingToday[index];
-                                      return GestureDetector(
-                                        onTap: () => _showSeriesDetails(series),
-                                        child: Container(
-                                          height: 160,
-                                          width: 115,
-                                          margin: EdgeInsets.only(right: 7),
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(5),
-                                            child: !series.hasPosterImage?
-                                            Image.asset(Assets.defaultPoster) :
-                                            Image.network(
-                                                series.posterImage,
-                                                fit: BoxFit.cover
-                                            ),
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
+                                SeriesCarousel(airingToday),
                                 Padding(padding: EdgeInsets.only(bottom: 20)),
                               ],
                             ),
@@ -587,22 +422,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   }
 
-  void _showSeriesDetails(Series series) {
-    DetailsBottomSheet.show(
-      context,
-      DetailsBottomSheet(
-        series.name!,
-        series.id!,
-        false,
-        series.posterImage,
-        series.overview!,
-        //highlight.releaseDate!
-        2020,
-        series.hasPosterImage
-      ),
-    );
-  }
-
   void _showMovieDetails(Movie movie) {
     DetailsBottomSheet.show(
       context,
@@ -612,8 +431,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           true,
           movie.posterImage,
           movie.overview!,
-          //highlight.releaseDate!
-          2020,
+          DateFormat.y().format(DateTime.parse(movie.releaseDate?? "2020-01-01")),
           movie.hasPosterImage
       ),
     );

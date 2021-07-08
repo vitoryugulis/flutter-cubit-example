@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movielist/assets.dart';
-import 'package:movielist/data/models/series.dart';
+import 'package:movielist/data/models/movie.dart';
 import 'package:movielist/ui/components/details_bottom_sheet.dart';
 
-class SeriesCarousel extends StatelessWidget {
-  final List<Series> series;
+class MovieCarousel extends StatelessWidget {
+  final List<Movie> movies;
 
-  const SeriesCarousel(this.series,
+  const MovieCarousel(
+      this.movies,
       {Key? key}) : super(key: key);
 
   @override
@@ -18,11 +19,11 @@ class SeriesCarousel extends StatelessWidget {
         padding: EdgeInsets.zero,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: series.length,
+        itemCount: movies.length,
         itemBuilder: (context, index) {
-          var item = series[index];
+          var item = movies[index];
           return GestureDetector(
-            onTap: () => _showSeriesDetails(context, item),
+            onTap: () => _showMovieDetails(context, item),
             child: Container(
               height: 160,
               width: 115,
@@ -43,19 +44,18 @@ class SeriesCarousel extends StatelessWidget {
     );
   }
 
-  void _showSeriesDetails(BuildContext context, Series series) {
-    print(series.firstAirDate);
+  void _showMovieDetails(BuildContext context, Movie movie) {
     DetailsBottomSheet.show(
       context,
       DetailsBottomSheet(
-          series.name!,
-          series.id!,
-          false,
-          series.posterImage,
-          series.overview!,
+          movie.title!,
+          movie.id!,
+          true,
+          movie.posterImage,
+          movie.overview!,
           //caso a data venha como string vazia do tmdb, efetua tratamento do dado
-          series.firstAirDate != ""? DateFormat.y().format(DateTime.parse(series.firstAirDate!)) : series.firstAirDate?? " - ",
-          series.hasPosterImage
+          movie.releaseDate != ""? DateFormat.y().format(DateTime.parse(movie.releaseDate!)) : movie.releaseDate?? " - ",
+          movie.hasPosterImage
       ),
     );
   }
