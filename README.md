@@ -16,6 +16,7 @@ Um catálogo de filmes e séries a partir da API do [TMDB](https://www.themovied
 flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 flutter run
+flutter run --release
 ```
 ## Observações técnicas
 
