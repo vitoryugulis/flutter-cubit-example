@@ -1,5 +1,5 @@
 # MovieList
-Um catálogo de filmes e séries, com lista de favoritos a partir da API do [TMDB](https://www.themoviedb.org/?language=pt-BR).
+Um catálogo de filmes e séries a partir da API do [TMDB](https://www.themoviedb.org/?language=pt-BR).
 
 ## Rodando o projeto
 ### Requisitos
