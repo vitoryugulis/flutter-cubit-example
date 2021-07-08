@@ -27,6 +27,20 @@ class SeriesLoaded extends SeriesState {
   @override
   int get hashCode => data.hashCode;
 }
+class SeriesDetailsLoaded extends SeriesState {
+  final Series data;
+  const SeriesDetailsLoaded(this.data);
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is SeriesDetailsLoaded && o.data == data;
+  }
+
+  @override
+  int get hashCode => data.hashCode;
+}
 
 class SeriesError extends SeriesState {
   final String message;

@@ -5,8 +5,6 @@ part 'series.g.dart';
 class Series {
   @JsonKey(name: "backdrop_path")
   String? backdropPath;
-  @JsonKey(name: "created_by")
-  List<String>? createdBy;
   @JsonKey(name: "episode_run_time")
   List<int>? episodeRunTime;
   @JsonKey(name: "first_air_date")
@@ -36,8 +34,6 @@ class Series {
   double? popularity;
   @JsonKey(name: "poster_path")
   String? posterPath;
-  @JsonKey(name: "production_companies")
-  List<String>? productionCompanies;
   @JsonKey(name: "production_countries")
   List<ProductionCountries>? productionCountries;
   List<Seasons>? seasons;
@@ -69,7 +65,6 @@ class Series {
 
   Series(
       {this.backdropPath,
-        this.createdBy,
         this.episodeRunTime,
         this.firstAirDate,
         this.genres,
@@ -88,7 +83,6 @@ class Series {
         this.overview,
         this.popularity,
         this.posterPath,
-        this.productionCompanies,
         this.productionCountries,
         this.seasons,
         this.spokenLanguages,

@@ -99,10 +99,12 @@ class SeriesCubit extends Cubit<SeriesState> {
 
   Future<Series> getById(int id) async {
     try {
+      emit(SeriesLoading());
       final response = await _seriesRepository.getById(id);
       var utf8body = utf8.decode(response.bodyBytes);
       var json = jsonDecode(utf8body);
       var data = Series.fromJson(json);
+      emit(SeriesDetailsLoaded(data));
       return data;
     } on Exception {
       throw new Exception();

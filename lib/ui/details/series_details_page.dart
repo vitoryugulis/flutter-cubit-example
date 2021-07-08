@@ -2,33 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
+import 'package:movielist/bloc/series_cubit.dart';
 import 'package:movielist/ui/assets.dart';
 import 'package:movielist/ui/details/components/loading_details.dart';
 import 'package:movielist/ui/details/components/loading_details_error.dart';
 
-class MovieDetailsPage extends StatefulWidget {
-  final int movieId;
-  const MovieDetailsPage(
-      this.movieId,
+class SeriesDetailsPage extends StatefulWidget {
+  final int seriesId;
+  const SeriesDetailsPage(
+      this.seriesId,
       {Key? key}
-  ) : super(key: key);
+      ) : super(key: key);
 
   @override
-  _MovieDetailsPageState createState() => _MovieDetailsPageState();
+  _SeriesDetailsPageState createState() => _SeriesDetailsPageState();
 }
 
-class _MovieDetailsPageState extends State<MovieDetailsPage> {
+class _SeriesDetailsPageState extends State<SeriesDetailsPage> {
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<MovieCubit>(context).getById(widget.movieId);
+    BlocProvider.of<SeriesCubit>(context).getById(widget.seriesId);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  BlocConsumer<MovieCubit, MovieState>(
+      body:  BlocConsumer<SeriesCubit, SeriesState>(
         listener: (context, state) {
           if (state is MovieError) {
             Container(
@@ -37,12 +38,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
           }
         },
         builder: (context, state) {
-          if (state is MovieInitial) {
+          if (state is SeriesInitial) {
             return LoadingDetails();
-          } else if (state is MovieLoading) {
+          } else if (state is SeriesLoading) {
             return LoadingDetails();
-          } else if (state is MovieDetailsLoaded) {
-            var movie = state.data;
+          } else if (state is SeriesDetailsLoaded) {
+            var series = state.data;
             return Container(
               padding: EdgeInsets.only(top: 20),
               child: Stack(
@@ -61,7 +62,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      movie.title?? " - ",
+                                      series.name?? " - ",
                                       style: TextStyle(
                                           fontSize: 26,
                                           color: Colors.white,
@@ -72,7 +73,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                     Row(
                                       children: [
                                         Text(
-                                          movie.releaseDate != ""? DateFormat.y().format(DateTime.parse(movie.releaseDate!)) : movie.releaseDate?? " - ",
+                                          series.firstAirDate != ""? DateFormat.y().format(DateTime.parse(series.firstAirDate!)) : series.firstAirDate?? " - ",
                                           style: TextStyle(
                                               fontSize: 13.5,
                                               color: Colors.grey
@@ -88,7 +89,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           ),
                                         ),
                                         Text(
-                                          movie.runtime.toString() + " min",
+                                          series.numberOfSeasons.toString() + " Seasons",
                                           style: TextStyle(
                                               fontSize: 13.5,
                                               color: Colors.grey
@@ -104,7 +105,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                           ),
                                         ),
                                         Text(
-                                          "Rating: " + movie.voteAverage.toString(),
+                                          "Rating: " + series.voteAverage.toString(),
                                           style: TextStyle(
                                               fontSize: 13.5,
                                               color: Colors.grey
@@ -191,7 +192,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                     ),
                                     SizedBox(height: 10,),
                                     Text(
-                                      movie.overview?? " No overview available",
+                                      series.overview?? " No overview available",
                                       style: TextStyle(
                                           fontSize: 13.5,
                                           color: Colors.white,
@@ -200,7 +201,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                     ),
                                     SizedBox(height: 20,),
                                     Wrap(
-                                      children: movie.genres!.map((e) {
+                                      children: series.genres!.map((e) {
                                         return Padding(
                                           padding: EdgeInsets.only(right: 8),
                                           child: Chip(
@@ -208,9 +209,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                                             label: Text(
                                               e.name!,
                                               style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 11,
-                                                fontWeight: FontWeight.w300
+                                                  color: Colors.white,
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w300
                                               ),
                                             ),
                                             backgroundColor: Color(0xFF414141),
@@ -294,12 +295,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                             ],
                           ),
                         ),
-                        movie.hasBackDropImage?
+                        series.hasBackDropImage?
                         Container(
                           height: 250,
                           color: Colors.green,
                           child: Image.network(
-                            movie.backdropImage,
+                            series.backdropImage,
                             fit: BoxFit.cover,
                           ),
                         ) :

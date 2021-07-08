@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:movielist/bloc/movie_cubit.dart';
+import 'package:movielist/bloc/series_cubit.dart';
 import 'package:movielist/data/repositories/movie_repository.dart';
+import 'package:movielist/data/repositories/series_repository.dart';
 import 'package:movielist/ui/assets.dart';
 import 'package:movielist/ui/details/movie_details_page.dart';
+import 'package:movielist/ui/details/series_details_page.dart';
 
 class DetailsBottomSheet extends StatelessWidget {
   final String posterImage;
@@ -274,8 +277,8 @@ class DetailsBottomSheet extends StatelessWidget {
             child: MovieDetailsPage(id),
           ) :
           BlocProvider(
-            create: (BuildContext context) => MovieCubit(new MovieRepository()),
-            child: MovieDetailsPage(id),
+            create: (BuildContext context) => SeriesCubit(new SeriesRepository()),
+            child: SeriesDetailsPage(id),
           );
         })
     );
